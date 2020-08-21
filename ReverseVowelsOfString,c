@@ -1,0 +1,55 @@
+// Reverse Vowels of a String
+
+void swap(char *c1, char *c2) {
+    char ch;
+    ch = *c1;
+    *c1 = *c2;
+    *c2 = ch;
+}
+
+bool isVowel(char ch) {
+    switch(ch) {
+        case 'a':
+        case 'e':
+        case 'i':
+        case 'o':
+        case 'u':
+        case 'A':
+        case 'E':
+        case 'I':
+        case 'O':
+        case 'U': return 1;
+    }
+    
+    // Else it is not a vowel
+    return 0;
+}
+
+char * reverseVowels(char * s){
+    int left_index = 0;
+    int right_index = strlen(s) - 1;
+    
+    // Use left_index  to start from beginning of the string and 
+    // Use right_index to start from the end of the string
+    while(left_index < right_index) {
+        
+        // Move left_index till we find the first/next vowel in the string
+        if(!isVowel(s[left_index])) {
+            left_index++;
+        }
+        
+        // Keep decrementing the right_index until we find a vowel
+        else if(!isVowel(s[right_index])) {
+            right_index--;
+        }
+        
+        // Then swap the two vowels and move the left index by one right and the right index by one left
+        else {
+            swap(&s[left_index], &s[right_index]);
+            left_index++;
+            right_index--;
+        }
+    }
+    
+    return s;
+}
